@@ -42,12 +42,6 @@ RSpec.describe 'The contestant index page' do
           end
         end
       end
-
-      it "I see theme of the challenge this project belongs to" do
-        visit "/projects/#{@news_chic.id}"
-
-        expect(page).to have_content(@recycled_material_challenge.theme)
-      end
     end
   end
 end
