@@ -52,7 +52,6 @@ RSpec.describe 'The project show page' do
         visit "/projects/#{@boardfit.id}"
 
         expect(page).to have_content("Contestants on Project: 2")
-        save_and_open_page
       end
     end
   end
