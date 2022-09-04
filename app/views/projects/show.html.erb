@@ -5,3 +5,16 @@
 <li>Contestants on Project: <%= @contestant_count%></li>
 <li>Average Contestant Experience: <%= @project_cont_avg_exp%></li>
 </ul>
+<div id="add_contestant">
+  <%= form_with url: '/contestants', method: :post, local: true do |form| %>
+    <%= form.label :name, "Name" %> 
+    <%= form.text_field :name %> <br>
+    <%= form.label :age, "Age" %> 
+    <%= form.text_field :age%> <br>
+    <%= form.label :hometown, "Hometown"%> 
+    <%= form.text_field :hometown%> <br>
+    <%= form.label :years_of_experience, "Years of Experience" %> 
+    <%= form.text_field :years_of_experience %> <br>
+    <%= form.submit 'Add Contestant' %>
+  <% end %>
+</div>

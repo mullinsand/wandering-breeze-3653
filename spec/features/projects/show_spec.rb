@@ -24,7 +24,7 @@ RSpec.describe 'The project show page' do
     ContestantProject.create(contestant_id: @kentaro.id, project_id: @boardfit.id)
     ContestantProject.create(contestant_id: @erin.id, project_id: @boardfit.id)
   end
-  
+
   describe "as a visitor" do
     describe "visiting show page" do
       it "I see projects name and material" do
@@ -68,6 +68,50 @@ RSpec.describe 'The project show page' do
 
         expect(page).to have_content("Average Contestant Experience: 11.5")
       end
+
+      it 'has a form to add contestant to this project' do
+        visit "/projects/#{@news_chic.id}"
+
+        within "#add_contestant" do
+          expect(page).to have_content("Name")
+          expect(page).to have_content("Age")
+          expect(page).to have_content("Hometown")
+          expect(page).to have_content("Years of Experience")
+        end
+      end
+
+      describe 'filling out/ submitting form' do
+       it 'returns back to project show page with contestants count increase by one' do
+        visit "/projects/#{@news_chic.id}"
+
+        within "#add_contestant" do
+          fill_in('name', with: 'Bob')
+          fill_in('age', with: '27')
+          fill_in('hometown', with: 'Bobville')
+          fill_in('years_of_experience', with: '27')
+          click_button('Add Contestant')
+        end
+
+        expect(page).to have_content("Contestants on Project: 3")
+      end
+
+      it 'when I visit the contestants index page, I see that project listed under their name' do
+        visit "/projects/#{@news_chic.id}"
+
+        within "#add_contestant" do
+          fill_in('name', with: 'Bob')
+          fill_in('age', with: '27')
+          fill_in('hometown', with: 'Bobville')
+          fill_in('years_of_experience', with: '27')
+          click_button('Add Contestant')
+        end
+        new_contestant = Contestant.last
+        within "#contestant_#{new_contestant.id}" do
+          expect(page).to have_content(new_contestant.name)
+          expect(page).to have_content(@news_chic.name)
+        end
+      end
+    end 
     end
   end
 end
