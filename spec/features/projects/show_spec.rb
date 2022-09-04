@@ -24,6 +24,7 @@ RSpec.describe 'The project show page' do
     ContestantProject.create(contestant_id: @kentaro.id, project_id: @boardfit.id)
     ContestantProject.create(contestant_id: @erin.id, project_id: @boardfit.id)
   end
+  
   describe "as a visitor" do
     describe "visiting show page" do
       it "I see projects name and material" do
@@ -52,6 +53,20 @@ RSpec.describe 'The project show page' do
         visit "/projects/#{@boardfit.id}"
 
         expect(page).to have_content("Contestants on Project: 2")
+      end
+
+      it 'has the average years of exp for the contestants on the project' do
+        visit "/projects/#{@news_chic.id}"
+
+        expect(page).to have_content("Average Contestant Experience: 12.5")
+
+        visit "/projects/#{@lit_fit.id}"
+
+        expect(page).to have_content("Average Contestant Experience: 0")
+
+        visit "/projects/#{@boardfit.id}"
+
+        expect(page).to have_content("Average Contestant Experience: 11.5")
       end
     end
   end
