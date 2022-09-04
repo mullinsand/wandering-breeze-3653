@@ -7,14 +7,15 @@
 </ul>
 <div id="add_contestant">
   <%= form_with url: '/contestants', method: :post, local: true do |form| %>
+    <%= form.hidden_field :project_id, value: @project.id %>
     <%= form.label :name, "Name" %> 
     <%= form.text_field :name %> <br>
     <%= form.label :age, "Age" %> 
-    <%= form.text_field :age%> <br>
+    <%= form.number_field :age%> <br>
     <%= form.label :hometown, "Hometown"%> 
     <%= form.text_field :hometown%> <br>
     <%= form.label :years_of_experience, "Years of Experience" %> 
-    <%= form.text_field :years_of_experience %> <br>
+    <%= form.number_field :years_of_experience %> <br>
     <%= form.submit 'Add Contestant' %>
   <% end %>
 </div>
