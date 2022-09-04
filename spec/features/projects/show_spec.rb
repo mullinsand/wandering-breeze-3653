@@ -45,13 +45,14 @@ RSpec.describe 'The project show page' do
 
         expect(page).to have_content("Contestants on Project: 2")
 
-        visit "/projects/#{@lil_fit.id}"
+        visit "/projects/#{@lit_fit.id}"
 
         expect(page).to have_content("Contestants on Project: 0")
 
         visit "/projects/#{@boardfit.id}"
 
         expect(page).to have_content("Contestants on Project: 2")
+        save_and_open_page
       end
     end
   end
