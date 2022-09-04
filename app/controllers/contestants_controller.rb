@@ -3,14 +3,8 @@ class ContestantsController < ApplicationController
     @contestants_name_projects = Contestant.all
   end
 
-  def create
-    project = Project.find(params[:project_id])
-    project.contestants.create(contestant_params)
-    redirect_to "/projects/#{project.id}"
-  end
-
-  private
-  def contestant_params
-    params.permit(:name, :age, :hometown, :years_of_experience)
+  def update
+    ContestantProject.create(contestant_id: params[:contestant_id], project_id: params[:project_id])
+    redirect_to "/projects/#{params[:project_id]}"
   end
 end

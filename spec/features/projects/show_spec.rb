@@ -73,10 +73,7 @@ RSpec.describe 'The project show page' do
         visit "/projects/#{@news_chic.id}"
 
         within "#add_contestant" do
-          expect(page).to have_content("Name")
-          expect(page).to have_content("Age")
-          expect(page).to have_content("Hometown")
-          expect(page).to have_content("Years of Experience")
+          expect(page).to have_content("Contestant ID")
         end
       end
 
@@ -85,10 +82,7 @@ RSpec.describe 'The project show page' do
           visit "/projects/#{@news_chic.id}"
 
           within "#add_contestant" do
-            fill_in('name', with: 'Bob')
-            fill_in('age', with: '27')
-            fill_in('hometown', with: 'Bobville')
-            fill_in('years_of_experience', with: '27')
+            fill_in('contestant_id', with: @kentaro.id)
             click_button('Add Contestant')
           end
 
@@ -99,18 +93,13 @@ RSpec.describe 'The project show page' do
           visit "/projects/#{@news_chic.id}"
 
           within "#add_contestant" do
-            fill_in('name', with: 'Bob')
-            fill_in('age', with: '27')
-            fill_in('hometown', with: 'Bobville')
-            fill_in('years_of_experience', with: '27')
+            fill_in('contestant_id', with: @kentaro.id)
             click_button('Add Contestant')
           end
-          new_contestant = Contestant.last
 
           visit "/contestants"
 
-          within "#contestant_#{new_contestant.id}" do
-            expect(page).to have_content(new_contestant.name)
+          within "#contestant_#{@kentaro.id}" do
             expect(page).to have_content(@news_chic.name)
           end
         end

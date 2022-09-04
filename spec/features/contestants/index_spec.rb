@@ -32,12 +32,9 @@ RSpec.describe 'The contestant index page' do
 
         @contestants.each do |contestant|
           within "#contestant_#{contestant.id}" do
-  
             expect(page).to have_content(contestant.name)
-            if contestant.projects.present?
-              contestant.projects.each do |project|
-                expect(page).to have_content(project.name)
-              end
+            contestant.projects.each do |project|
+              expect(page).to have_content(project.name)
             end
           end
         end
